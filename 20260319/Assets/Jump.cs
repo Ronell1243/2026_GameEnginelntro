@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Jump : MonoBehaviour
 {
@@ -50,5 +51,17 @@ public class Jump : MonoBehaviour
             myAnimator.SetBool("move", false);
         }
             transform.Translate(Vector3.right * moveSpeed * moveInput * Time.deltaTime);
+        
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name == "Death")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            SceneManager.LoadScene("Playscene_" + collision.name);
+        }
     }
 }
